@@ -1,0 +1,41 @@
+<?php
+session_start();
+require_once "../models/m_koneksi.php";
+
+$kon = new m_koneksi();
+
+// Pastikan ada parameter ID dan aksi di URL
+if (isset($_GET['id']) && isset($_GET['aksi'])) {
+    
+    // Ambil data dari URL dengan aman
+    $id_transaksi = mysqli_real_escape_string($kon->conn, $_GET['id']);
+    $aksi = $_GET['aksi'];
+    
+    // Tentukan status baru berdasarkan aksi
+    $status_baru = "";
+    if ($aksi == 'acc') {
+        $status_baru = "Dipinjam"; 
+    } elseif ($aksi == 'tolak') {
+        $status_baru = "Ditolak";
+    }
+
+    // Eksekusi query UPDATE
+    if ($status_baru != "") {
+        $query = "UPDATE transaksi SET status_transaksi = '$status_baru' WHERE id_transaksi = '$id_transaksi'";
+        
+        if (mysqli_query($kon->conn, $query)) {
+            echo "<script>
+                alert('Berhasil! Status transaksi telah diubah menjadi: $status_baru');
+                window.location='../views/admin/data_transaksi.php';
+            </script>";
+        } else {
+            echo "Error Database: " . mysqli_error($kon->conn);
+        }
+    } else {
+        echo "<script>alert('Aksi tidak valid!'); window.location='../views/admin/data_transaksi.php';</script>";
+    }
+} else {
+    // Jika diakses langsung tanpa parameter
+    header("Location: ../views/admin/data_transaksi.php");
+}
+?>

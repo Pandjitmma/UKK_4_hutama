@@ -1,0 +1,161 @@
+/* Import Font yang lebih modern */
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700&display=swap');
+
+:root {
+    --primary-cyan: #00d2d3;
+    --dark-bg: #0b0e14;
+    --card-bg: rgba(255, 255, 255, 0.03);
+    --glass-border: rgba(255, 255, 255, 0.1);
+    --text-main: #f8fafc;
+    --text-dim: #94a3b8;
+}
+
+body {
+    background-color: var(--dark-bg);
+    background-image: radial-gradient(circle at 0% 0%, rgba(0, 210, 211, 0.05) 0%, transparent 50%);
+    color: var(--text-main);
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    margin: 0;
+    padding: 20px;
+}
+
+/* Header & Search Bar */
+h1, h2 {
+    font-weight: 700;
+    letter-spacing: -0.5px;
+}
+
+.search-container {
+    background: var(--card-bg);
+    border: 1px solid var(--glass-border);
+    backdrop-filter: blur(10px);
+    border-radius: 16px;
+    padding: 12px 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 40px;
+    transition: 0.3s;
+}
+
+.search-container:focus-within {
+    border-color: var(--primary-cyan);
+    box-shadow: 0 0 20px rgba(0, 210, 211, 0.1);
+}
+
+.search-container input {
+    background: transparent;
+    border: none;
+    color: white;
+    font-size: 1rem;
+    width: 100%;
+    outline: none;
+}
+
+/* Grid Koleksi Buku */
+.book-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 24px;
+}
+
+/* Card Buku Interaktif */
+.book-card {
+    background: var(--card-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: 24px;
+    padding: 24px;
+    text-align: center;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
+
+.book-card::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: linear-gradient(135deg, rgba(0, 210, 211, 0.1) 0%, transparent 100%);
+    opacity: 0;
+    transition: 0.4s;
+}
+
+.book-card:hover {
+    transform: translateY(-12px);
+    background: rgba(255, 255, 255, 0.07);
+    border-color: var(--primary-cyan);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+}
+
+.book-card:hover::before {
+    opacity: 1;
+}
+
+/* Icon Buku */
+.book-card i {
+    font-size: 3.5rem;
+    color: var(--primary-cyan);
+    margin-bottom: 20px;
+    filter: drop-shadow(0 0 10px rgba(0, 210, 211, 0.3));
+}
+
+.book-card h3 {
+    font-size: 1.1rem;
+    margin: 10px 0 5px 0;
+    color: white;
+}
+
+.book-card p {
+    color: var(--text-dim);
+    font-size: 0.85rem;
+    margin-bottom: 15px;
+}
+
+/* Badge Stok */
+.stok-badge {
+    display: inline-block;
+    background: rgba(0, 210, 211, 0.1);
+    color: var(--primary-cyan);
+    padding: 6px 14px;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    border: 1px solid rgba(0, 210, 211, 0.2);
+}
+
+/* Verifikasi Section (Seperti di gambar kamu) */
+.verify-item {
+    background: var(--card-bg);
+    border-left: 4px solid #ff9f43; /* Warna orange peringatan */
+    border-radius: 16px;
+    padding: 20px;
+    margin-bottom: 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid var(--glass-border);
+    border-right: 1px solid var(--glass-border);
+    border-bottom: 1px solid var(--glass-border);
+}
+
+.status-active-item {
+    border-left-color: #1dd1a1; /* Hijau sukses */
+    background: rgba(29, 209, 161, 0.02);
+}
+
+.btn-terima {
+    background: #1dd1a1;
+    color: #0b0e14;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 10px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.btn-terima:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 15px rgba(29, 209, 161, 0.4);
+}
